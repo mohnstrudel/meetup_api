@@ -1,0 +1,11 @@
+%main.container{:role => "main"}
+	.container.custom_margin_100
+		.row
+			.col
+			.col-10.text-center
+				%h1 Meetups client
+				.input-group.mb-3.custom_margin_25
+					%input.form-control{"aria-describedby" => "button-addon", "aria-label" => "Type your search query", :placeholder => "Type your search query", :type => "text"}
+					.input-group-append
+						%button#button-addon2.btn.btn-outline-success{:type => "button"} Search
+			.col
