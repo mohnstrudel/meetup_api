@@ -1,0 +1,13 @@
+.card.flex-md-row.mb-4.shadow-sm.h-md-250
+	-if response["key_photo"].present?
+		-unless response["key_photo"]["thumb_link"].empty?
+			=image_tag response["key_photo"]["thumb_link"], class: 'card-img-right flex-auto d-none d-lg-block result_picture'
+	-else
+		=image_tag response["meta_category"]["photo"]["thumb_link"], class: 'card-img-right flex-auto d-none d-lg-block result_picture'
+	/ %img.card-img-right.flex-auto.d-none.d-lg-block{:alt => "Card image cap", "data-src" => "holder.js/200x250?theme=thumb"}/
+	.card-body.d-flex.flex-column.align-items-start
+		%strong.d-inline-block.mb-2.text-primary=response["category"]["name"]
+		%h3.mb-0
+			%a.text-dark{:href => "#"}=response["name"]
+		.mb-1.text-muted=response["status"]
+		%p.card-text.mb-auto=response["untranslated_city"]
