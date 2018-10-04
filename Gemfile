@@ -41,6 +41,10 @@ gem 'bootstrap'
 gem 'haml-rails'
 gem "faraday"
 gem 'faraday_middleware'
+gem 'redis'
+gem 'redis-rails'
+gem 'redis-namespace'
+gem 'redis-rack-cache'
 
 
 group :development, :test do

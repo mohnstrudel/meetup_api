@@ -4,16 +4,20 @@ class SearchController < ApplicationController
 	
 
 	def perform
-		# @response = Faraday.get 'https://api.meetup.com/2/events?key=ABDE12456AB2324445&group_urlname=ny-tech&sign=true'
-		# @responses = Faraday.get "https://api.meetup.com/find/groups?key=#{@key}&sign=true&location=munich&text=#{params[:query]}"
-		# @responses = @responses.body.force_encoding("utf-8").to_a
 
-		connection = Faraday.new "https://api.meetup.com" do |conn|
-  		conn.response :json, :content_type => /\bjson$/
-			conn.adapter Faraday.default_adapter
-		end
-		json_response = connection.get("find/groups?key=#{@key}&sign=true&location=munich&text=#{params[:query]}")
-		@responses = json_response.body  #=> { ... }
+		query = params[:query]
+		responses = $redis.get(query)
+
+    if responses.nil?
+      responses = get_request
+      $redis.set(query, responses)
+    else
+    	# Pain, gore and glory.
+    	# Without the gsub parsing leads to this error:
+    	# JSON::ParserError: 451: unexpected token at '{
+    	responses = JSON.parse responses.gsub('=>', ':')
+    end
+    @responses = responses
 
 		respond_to do |format|
 			format.js { render 'results.js' }
@@ -25,7 +29,7 @@ class SearchController < ApplicationController
   		conn.response :json, :content_type => /\bjson$/
 			conn.adapter Faraday.default_adapter
 		end
-		json_response = connection.get('find/groups?key=#{@key}&sign=true&location=munich&text=#{params[:query]}')
+		json_response = connection.get("find/groups?key=#{@key}&sign=true&location=munich&text=#{params[:query]}")
 		json_response.body  #=> { ... }
 	end
 
