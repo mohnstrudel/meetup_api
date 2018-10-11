@@ -1,4 +1,4 @@
 %h1="Here are the results for query '#{params[:query]}' and location Munich:"
 
 -responses.each do |response|
-	=render partial: 'result', locals: { response: response }
+	=render partial: 'search/result', locals: { response: response }

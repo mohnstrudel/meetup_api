@@ -28,8 +28,16 @@ module MeetupApi
     # the framework and any gems in your application.
 
     # Don't generate system test files.
+
+    config.action_cable.mount_path = '/websocket'
+    
     config.generators.system_tests = nil
 
     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+
+    config.active_job.queue_adapter     = :sidekiq
+
+    # Include files from lib path
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end

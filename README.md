@@ -1,24 +1,24 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+How to setup locally:
 
-Things you may want to cover:
 
-* Ruby version
+* brew install redis
 
-* System dependencies
+* start up redis from your current app directory (homebrew provides 2 commands, choose one of them)
 
-* Configuration
+* start up sidekiq from your current app directory (simply type 'sidekiq')
 
-* Database creation
+## Redis
+Startable via two options on mac:
 
-* Database initialization
+redis-server /usr/local/etc/redis.conf
 
-* How to run the test suite
+or
 
-* Services (job queues, cache servers, search engines, etc.)
+brew services start redis
 
-* Deployment instructions
-
-* ...
+To have launchd start redis now and restart at login:
+  brew services start redis
+Or, if you don't want/need a background service you can just run:
+  redis-server /usr/local/etc/redis.conf

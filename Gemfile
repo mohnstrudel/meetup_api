@@ -45,6 +45,8 @@ gem 'redis'
 gem 'redis-rails'
 gem 'redis-namespace'
 gem 'redis-rack-cache'
+gem 'sidekiq'
+gem "figaro"
 
 
 group :development, :test do
