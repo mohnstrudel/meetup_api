@@ -33,7 +33,7 @@ module MeetupApi
     
     config.generators.system_tests = nil
 
-    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
+    config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 5.minutes }
 
     config.active_job.queue_adapter     = :sidekiq
 
